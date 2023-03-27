@@ -137,27 +137,91 @@ void inserirElemento()
 		// procura o final da lista
 		NO* aux = primeiro;
 		while (aux != NULL) {
-			if (novo->valor == aux->valor) {
+			if (aux->valor == novo->valor) {
 				cout << "Elemento ja existe\n";
 				return;
 			}
 			aux = aux->prox;
-			}
+		}
+		aux = primeiro;
+		while (aux->prox != NULL) {
+			aux = aux->prox;
+		}
 		aux->prox = novo;
 	}
-
-	}
+}
 
 void excluirElemento()
 {
-	
+	int valor;
+	NO* exclu = NULL;
+	NO* aux = primeiro;
+	NO* anterior = NULL;
+
+	if (primeiro == NULL) {
+		cout << "Lista vazia\n";
+		return;
+	}
+
+	cout << "Digite o valor que deseja excluir\n";
+	cin >> valor;
+
+	while (aux != NULL) {
+		if (aux->valor == valor) {
+			if (anterior == NULL) {
+				primeiro = aux->prox;
+			}
+			else {
+				anterior->prox = aux->prox;
+			}
+			cout << "EXCLUIDO\n";
+			free(aux);
+			return;
+		}
+		anterior = aux;
+		aux = aux->prox;
+	}
+
+	cout << "NÃO ENCONTRADO\n";
 }
 
 void buscarElemento()
 {
-	
-}
+	NO* busca = (NO*)malloc(sizeof(NO));
+	if (busca == NULL)
+	{
+		return;
+	}
 
+	if (primeiro == NULL)
+	{
+		cout << "Lista vazia \n";
+		return;
+	}
+
+	cout << "Qual elemento deseja buscar?\n";
+	cin >> busca->valor;
+	busca->prox = NULL;
+	int x = 0;
+
+	NO* aux = primeiro;
+	while (aux != NULL)
+	{
+		if (aux->valor == busca->valor)
+		{
+			x++;
+		}
+		aux = aux->prox;
+	}
+	if (x == 0)
+	{
+		cout << "NAO ENCONTRADO\n";
+	}
+	else
+	{
+		cout << "ENCONTRADO\n";
+	}
+}
 
 
 // retorna um ponteiro para o elemento buscado
